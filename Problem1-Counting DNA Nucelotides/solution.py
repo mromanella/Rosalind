@@ -12,25 +12,28 @@ AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC
 Sample Output
 20 12 17 21"""
 
-TEST_STRING = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'
-adenine = 'A'
-cytosine = 'C'
-guanine = 'G'
-thymine = 'T'
+
+import sys
+sys.path.append('../utils')
+
+test_string = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'
+expected = '20 12 17 21'
+
 
 def count_nucleobases(dna_string):
     """Counts the amount of nucleobases:
     adenine(A), cytosine(C), guanine(G) and thymine(T).
     Returns four integers seperated by spaces of frequency of occurrence of like (A, C, G, T)."""
-    return ' '.join(map(str, 
-        (dna_string.count(adenine),
-        dna_string.count(cytosine),
-        dna_string.count(guanine),
-        dna_string.count(thymine))
-    ))
-     
+    from utils import adenine, cytosine, guanine, thymine
+    return ' '.join(map(str,
+                        (dna_string.count(adenine),
+                         dna_string.count(cytosine),
+                         dna_string.count(guanine),
+                         dna_string.count(thymine))
+                        ))
+
 
 if __name__ == '__main__':
-    assert count_nucleobases(TEST_STRING) == '20 12 17 21'
+    assert count_nucleobases(test_string) == expected
     with open('rosalind_dna.txt') as infile:
         print(count_nucleobases(infile.read()))
