@@ -45,11 +45,21 @@ TGGGAACCTGCGGGCAGTAGGTGGAAT"""
 def gc_content(dna_string):
     """Performs the gc ration on the str."""
     from utils import guanine, cytosine
-    return dna_string.count(guanine) + dna_string.count(cytosine) / len(dna_string)
+    return (dna_string.count(guanine) + dna_string.count(cytosine)) / len(dna_string)
 
 
 if __name__ == '__main__':
     rosalinds = test_string.split('>')
+    rank = []
+    for r in rosalinds:
+        if r and not r.isspace():
+            r = r.strip().replace('\n', '')
+            name = r[:13]
+            dna_string = r[13:]
+            rank.append((name, gc_content(dna_string)))
+    print(sorted(rank, key=lambda x: x[1], reverse=True))
+    with open('rosalind_gc.txt') as infile:
+        rosalinds = infile.read().split('>')
     rank = []
     for r in rosalinds:
         if r and not r.isspace():
