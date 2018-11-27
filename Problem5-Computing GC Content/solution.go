@@ -54,21 +54,7 @@ type rank struct {
 
 type ranks []rank
 
-func (r ranks) Len() int {
-	return len(r)
-}
-func (r ranks) Swap(i, j int) {
-	r[i], r[j] = r[j], r[i]
-}
-func (r ranks) Less(i, j int) bool {
-	return r[i].percentage > r[j].percentage
-}
-
-func (r rank) String() string {
-	return fmt.Sprintf("(%s, %f)", r.name, r.percentage)
-}
-
-// GCContent performs the gc ration on the str.
+// GCContent performs the gc ratio on the str.
 func GCContent(DNAString string) float64 {
 	return float64(strings.Count(DNAString, utils.Guanine)+strings.Count(DNAString, utils.Cytosine)) / float64(len(DNAString))
 }
